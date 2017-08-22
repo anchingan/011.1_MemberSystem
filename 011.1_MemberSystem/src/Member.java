@@ -1,25 +1,68 @@
 
-import java.io.*;
-import java.lang.*;
-import java.util.Scanner;
-
-public class TestMemberSystem {
-
-	public static void main(String[] args) {
-//		Member[] membersArray = new Member[50];
-//		
-//		
-//		membersArray[0] = new Member(1,"黃獻鋒", "F227518590", 1988, 2, 3,"0225342312");
-//		membersArray[1] = new Member(5,"黃獻鋒", "A128099248", 1990, 3, 5,"0222312");
-//		for (int i = 0; i < 2; i++)
-//		System.out.println(membersArray[i]);
+public class Member {
+	private String name, iD, phone;
+	private Birthday birthday;
+	private int num;
+	
+	public Member(int num, String name, String iD, int y, int m, int d, String phone) {
+		this.name = "Name undefined";
 		
-		String a = "F227518590";
-		String b = idCheck(a);
-		System.out.println(a);
-		System.out.println(b);
-
-
+		if (name != null)
+			this.name = name;
+		this.iD = idCheck(iD);
+		this.birthday = new Birthday(y, m, d);
+		this.phone = phone;
+		if (num > 0 && num < 100)
+			this.num = num;
+		else
+			this.num = 0;
+		
+	}
+	//Methods allow other to get value of members.
+	public String getName() {
+		return this.name;
+	}
+	public String getId() {
+		return this.iD;
+	}
+	public String getPhone() {
+		return this.phone;
+	}
+	public String getBirthday() {
+		return this.birthday.toString();
+	}
+	public int getNum() {
+		return this.num;
+	}
+	
+	//Methods allow other to set value of members.
+	public boolean setNum(int i) {
+		if (i > 0 && i < 100) {
+			this.num = i;
+			return true;
+		}
+		else
+			return false;
+	}
+	
+	public boolean setName(String nameInput) {
+		if (nameInput != null) {
+			this.name = nameInput;
+			return true;
+		}
+		return false;
+	}
+	
+	public void setID(String idInput) {
+		this.iD = idCheck(idInput);
+	}
+	
+	public void setPhone(String phoneInput) {
+		this.phone = phoneInput;
+	}
+	
+	public void setBirthday(int y, int m, int d) {
+		this.birthday.setBirthday(y, m, d);
 	}
 	
 	private static String idCheck(String input) {
@@ -55,6 +98,7 @@ public class TestMemberSystem {
 		}
 		return "A123456789";
 	}
+	
 	private static int charTrans(char first) {
 		int[] transInt = new int[27];
 
@@ -88,4 +132,12 @@ public class TestMemberSystem {
 		return -1;
 	}
 	
+	@Override
+	public String toString() {
+		String output;
+		output = String.format("%03d", this.num) + "\t" + String.format("%3S",this.name) + "\t" + String.format("%10S",this.iD) + "\t" + this.birthday + " \t" + String.format("%10S",this.phone);	
+		return output;
+	}
+	
+
 }
