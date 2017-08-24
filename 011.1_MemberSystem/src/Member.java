@@ -80,7 +80,7 @@ public class Member {
 		this.setBirthday(y, m, d);
 	}
 	
-	private static String idCheck(String input) {
+	public static String idCheck(String input) {
 		//Transform the first character into integer to check if it's character.
 		int a = (int)input.charAt(0);
 		//If first character is lower case, trans into upper case.
